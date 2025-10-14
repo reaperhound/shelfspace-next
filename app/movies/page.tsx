@@ -1,4 +1,8 @@
-export default function MovieGrid() {
+import { getWatchList } from "../serverActions/movies";
+
+export default async function MovieGrid() {
+  const html = await getWatchList();
+  console.log("🚀 ~ MovieGrid ~ html:", html);
   return (
     <div>
       <title>Movies</title>
