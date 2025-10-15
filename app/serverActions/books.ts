@@ -1,6 +1,20 @@
 "use server";
 import * as cheerio from "cheerio";
 
+interface Book {
+  title: string;
+  series: string;
+  seriesNumber: string;
+  author: string;
+  coverImage?: string;
+  pages?: string;
+  format?: string;
+  year?: string;
+  isbn?: string;
+  publisher?: string;
+  tags: string[];
+}
+
 export default async function getTBR(pageNum: string) {
   const result = await fetch(
     `https://app.thestorygraph.com/to-read/eithan_arellius?page=${pageNum}`,
@@ -21,7 +35,7 @@ export default async function getTBR(pageNum: string) {
 
 function parseBookHtml(html: string) {
   const $ = cheerio.load(html);
-  const booksMap = new Map<string, any>();
+  const booksMap = new Map<string, Book>();
   $(".cover-image-column").each((_, elem) => {
     const container = $(elem).closest("div.grid");
     const bookId = container.find(".edition-info").attr("data-book-id");
@@ -80,7 +94,10 @@ function parseBookHtml(html: string) {
 
   const filterText = $("span.font-semibold.align-middle").text().trim();
   const match = filterText.match(/Filter list \((\d+) books\)/);
-  const numberOfBooks = parseInt(match[1], 10);
+  let numberOfBooks = 0;
+  if (match) {
+    numberOfBooks = parseInt(match[1], 10);
+  }
   console.log(numberOfBooks); // 412
 
   const books = Array.from(booksMap.values());
