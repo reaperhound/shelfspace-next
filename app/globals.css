@@ -7,6 +7,13 @@
 
 @theme {
   --color-primary: #ffffff;
+  --color-granny-smith-apple-50: #b1ffb8;
+  --color-granny-smith-apple-100: #7df88b;
+  --color-granny-smith-apple-200: #7deb88;
+  --color-granny-smith-apple-300: #64b66c;
+  --color-granny-smith-apple-400: #417545;
+  --color-granny-smith-apple-500: #264d2a;
+  --color-granny-smith-apple-600: #0a1b0c;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -10,13 +10,13 @@ export default async function MovieGrid({ params }: MovieGridProps) {
   const { page } = await params;
   const { movies, totalPages } = await getWatchList(page);
   return (
-    <div className='w-full grid place-items-center p-[5vh] bg-primary'>
+    <div className='w-full grid place-items-center p-[5vh] bg-granny-smith-apple-50'>
       <div className='grid grid-cols-7 place-items-center gap-x-[13px] gap-y-2 w-fit'>
         {movies.map((movie) => (
           <Card url2x={movie.url2x} key={movie.url2x} />
         ))}
-        <Pagination currentPage={Number(page)} totalPages={totalPages} />
       </div>
+      <Pagination currentPage={Number(page)} totalPages={totalPages} />
     </div>
   );
 }
