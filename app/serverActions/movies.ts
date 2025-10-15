@@ -35,7 +35,7 @@ export async function getWatchList(pageNum: number) {
 }
 
 async function getPosters(link: string) {
-  let posterLink = `https://letterboxd.com${link}poster/std/230/?k=5c13e84e`;
+  const posterLink = `https://letterboxd.com${link}poster/std/230/?k=5c13e84e`;
   const result = await fetch(posterLink);
   const pstrLink = await result.json();
   return pstrLink;
