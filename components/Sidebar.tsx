@@ -11,7 +11,9 @@ export default function Sidebar() {
         <Link href={"/movies/1"}>
           <Image src={"/movie.svg"} alt='Logo' width={20} height={20} />
         </Link>
-        <Image src={"/movies.svg"} alt='Logo' width={20} height={20} />
+        <Link href={"/books/1"}>
+          <Image src={"/bookOpen.svg"} alt='Logo' width={20} height={20} />
+        </Link>
         <Image src={"/movies.svg"} alt='Logo' width={20} height={20} />
         <Image src={"/movies.svg"} alt='Logo' width={20} height={20} />
         <Image src={"/movies.svg"} alt='Logo' width={20} height={20} />

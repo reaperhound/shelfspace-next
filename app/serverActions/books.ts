@@ -1,9 +1,9 @@
 "use server";
 import * as cheerio from "cheerio";
 
-export default async function getTBR() {
+export default async function getTBR(pageNum: string) {
   const result = await fetch(
-    "https://app.thestorygraph.com/to-read/eithan_arellius",
+    `https://app.thestorygraph.com/to-read/eithan_arellius?page=${pageNum}`,
     {
       headers: {
         Cookie:
@@ -17,7 +17,7 @@ export default async function getTBR() {
   const html = await result.text();
   const parsed = parseBookHtml(html);
   console.log("🚀 ~ getTBR ~ parsed:", parsed);
-  return html;
+  return parsed;
 }
 
 function parseBookHtml(html: string) {
