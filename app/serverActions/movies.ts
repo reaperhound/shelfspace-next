@@ -25,15 +25,15 @@ export async function getWatchList(pageNum: string) {
   const parsedData = parseWithCheerio(html);
 
   const moviesWithPosters = await Promise.all(
-    parsedData.movies.map(async (movie) => {
-      if (movie.link) {
-        const posterData = await getPosters(movie.link);
+    parsedData.movies
+      .filter((movie) => (movie.link ? true : false))
+      .map(async (movie) => {
+        const posterData = await getPosters(movie.link!);
         return {
           ...movie,
           ...posterData,
         };
-      }
-    })
+      })
   );
   console.log(moviesWithPosters);
   return { totalPages: parsedData.totalPages, movies: moviesWithPosters };
