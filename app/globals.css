@@ -1,18 +1,12 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --clr-hope-a0: oklch(36.2% 0.077 164);
-  --clr-hope-a10: oklch(45.8% 0.099 163);
-  --clr-hope-a20: oklch(56% 0.123 162);
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@theme {
+  --color-primary: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {

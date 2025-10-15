@@ -12,7 +12,12 @@ type Movie = {
   cleanTitle?: string;
 };
 
-export async function getWatchList(pageNum: string | number) {
+type GetPosters = Promise<{
+  url: string;
+  url2x: string;
+}>;
+
+export async function getWatchList(pageNum: string) {
   const result = await fetch(
     `https://letterboxd.com/Reaper_Hound/watchlist/page/${pageNum}`
   );
@@ -30,11 +35,11 @@ export async function getWatchList(pageNum: string | number) {
       }
     })
   );
-  console.log(moviesWithPosters?.length);
-  return moviesWithPosters;
+  console.log(moviesWithPosters);
+  return { totalPages: parsedData.totalPages, movies: moviesWithPosters };
 }
 
-async function getPosters(link: string) {
+async function getPosters(link: string): GetPosters {
   const posterLink = `https://letterboxd.com${link}poster/std/230/?k=5c13e84e`;
   const result = await fetch(posterLink);
   const pstrLink = await result.json();
