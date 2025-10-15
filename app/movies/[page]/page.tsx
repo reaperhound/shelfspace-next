@@ -2,9 +2,7 @@ import { getWatchList } from "../../serverActions/movies";
 import Card from "../../../components/Card";
 
 type MovieGridProps = {
-  params: {
-    page: string | number;
-  };
+  params: Promise<{ page: string }>;
 };
 
 export default async function MovieGrid({ params }: MovieGridProps) {
