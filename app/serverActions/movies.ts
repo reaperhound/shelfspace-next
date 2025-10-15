@@ -1,32 +1,24 @@
 "use server";
 import * as cheerio from "cheerio";
 
-export async function getWatchList() {
-  let watchlist = [];
-  let pageNum = 1;
-  while (true) {
-    const result = await fetch(
-      `https://letterboxd.com/Reaper_Hound/watchlist/page/${pageNum}`
-    );
-    const html = await result.text();
-    const parsedData = parseWithCheerio(html);
+export async function getWatchList(pageNum: number) {
+  const result = await fetch(
+    `https://letterboxd.com/Reaper_Hound/watchlist/page/${pageNum}`
+  );
+  const html = await result.text();
+  const parsedData = parseWithCheerio(html);
 
-    if (parsedData.movies.length === 0) break;
+  const moviesWithPosters = await Promise.all(
+    parsedData.movies.map(async (movie) => {
+      const posterData = await getPosters(movie.link);
+      return {
+        ...movie,
+        ...posterData,
+      };
+    })
+  );
 
-    const moviesWithPosters = await Promise.all(
-      parsedData.movies.map(async (movie) => {
-        const posterData = await getPosters(movie.link);
-        return {
-          ...movie,
-          ...posterData,
-        };
-      })
-    );
-    watchlist.push(...moviesWithPosters);
-    pageNum++;
-  }
-
-  return watchlist;
+  return moviesWithPosters;
 }
 
 async function getPosters(link: string) {
