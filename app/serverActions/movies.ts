@@ -1,6 +1,17 @@
 "use server";
 import * as cheerio from "cheerio";
 
+type Movie = {
+  title?: string;
+  slug?: string;
+  link?: string;
+  fullLink?: string;
+  filmId?: string;
+  posterUrl?: string;
+  year?: string;
+  cleanTitle?: string;
+};
+
 export async function getWatchList(pageNum: number) {
   const result = await fetch(
     `https://letterboxd.com/Reaper_Hound/watchlist/page/${pageNum}`
@@ -10,11 +21,13 @@ export async function getWatchList(pageNum: number) {
 
   const moviesWithPosters = await Promise.all(
     parsedData.movies.map(async (movie) => {
-      const posterData = await getPosters(movie.link);
-      return {
-        ...movie,
-        ...posterData,
-      };
+      if (movie.link) {
+        const posterData = await getPosters(movie.link);
+        return {
+          ...movie,
+          ...posterData,
+        };
+      }
     })
   );
 
@@ -32,7 +45,7 @@ function parseWithCheerio(html: string) {
   const $ = cheerio.load(html);
 
   const totalEntries = $(".js-watchlist-content").attr("data-num-entries");
-  const movies = [];
+  const movies: Movie[] = [];
 
   $(".griditem").each((i, elem) => {
     const reactComponent = $(elem).find('[data-component-class="LazyPoster"]');
@@ -54,7 +67,6 @@ function parseWithCheerio(html: string) {
   });
 
   return {
-    totalCount: parseInt(totalEntries),
     movies,
     moviesOnPage: movies.length,
   };
