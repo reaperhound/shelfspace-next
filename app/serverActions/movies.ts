@@ -30,7 +30,7 @@ export async function getWatchList(pageNum: string | number) {
       }
     })
   );
-
+  console.log(moviesWithPosters?.length);
   return moviesWithPosters;
 }
 
