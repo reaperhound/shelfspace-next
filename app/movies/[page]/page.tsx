@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getWatchList } from "../../serverActions/movies";
 import Card from "../../../components/Card";
 
