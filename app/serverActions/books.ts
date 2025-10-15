@@ -7,7 +7,7 @@ export default async function getTBR(pageNum: string) {
     {
       headers: {
         Cookie:
-          "cf_clearance=rd5Y7gBfU.EsQNzumou0y0DN26enL5xZZv_sQp59eXw-1760543428-1.2.1.1-z0uAhro2nv4ruq8AYjm48vDwZowtqJwbhDmvL6hK61h2tbZCOhn4c2dmO4PFDQgazSj5RLecMlwDWg7Onunj0dToT1Q9BourBc8JZ8STFaT7LJaaI5glw6AnU9ata3uXK4kCLD.bkpf0tU2f4oT5Y4ZcBw91t9iJP2q.YsiAd5RxKZx5E2ra8F24ssgET1zvPZgl.bvivR7xWh0Tc_8RSCKfSUoYb0bUEVrpJS1nidc; _storygraph_session=f%2BicTBaWFNZd2rrWGRbTeWYHZalPoJtnEYTwgVlnzMOdikBlcGTlJBqEsCD4HwC3aXwCItttkuNYuHlZvpuSFuTmdrby3GW7yq3ftEbOiNEfEyXIXAztp5ljDdHSArobuNbMdFLa3a7eS7C7H6D2P%2B%2B%2Fyd0QKrND1f3eJjE3b6ocG2%2BlQNhrRTk%2BX3xri8iRk7fGclFXWmSptZhCNTgeVcAjESCnW8WcF5kRo0F4nG%2BsZUwOo4NzhrV%2B1uTZ0yND13amg9bHK4V9DaoRx0mpt8kihXLU1%2F%2Fc8VJkBR%2FmiTir7bL%2B1tBXOExu6OmUJjEYmA%3D%3D--LKpQ6HS%2Bju2oqtQh--lFDua1v8VzKrnt9jxe3Lqg%3D%3D; up_next_onboarding=true",
+          "_storygraph_session=7CP2fePJ5vLIu%2F16qSscyeJMEtJcTA1KpZB9EPj7JKk%2FqftaJdsxsf0w0ky05x5LS9D6Qea6C2hsU0PN9cWlljMW5cJgwsSugPWPkEERSKJFNFgLA%2BDJIdzlNrHMLdhp9P9tlIxwDj9Ggv6Abe08ucxVNGoN%2BseZalrcBR8dJVUWjgPqd19yj6UQC%2BlWSNm2huJnkUn7zeLB%2Fy%2BtdK4zjDv0PGHgT4gHi1rBX5dqMdNU2ndOlJElHF557MbxstCQjNN4MA6lsCSpq1BhxJgkiBHS9B2xuAarkuQJQHKCmnFsaOXB4DCNb%2Fazw8PjETV9c%2BGTABkx15rH3k1%2Fm1UwSz6cSjaS1dy18trKr40PIFj8WqqrqpkYKviIG%2FIZItfK6h6Y8bfJ%2BESZpNLd3zNM9uH19OtbQ7gX4r1%2FYAvvHjJS2fLQw1IQfrmiCPMqNK4qJTp5aXytJ3%2F4FB5MoSNQPi%2B2I0Eid2%2BiTvoHV6wTHBUTJrcPBjEySJD6bFNWIaWgmyJo6eYetwsGoaWUYpE7E6Y1TZsvW6eGmSEZwrEbU%2B9O%2FAuAhnLwOef8NyCgRZOH0%2Bjn2MiQYEjegALi2vKp%2FSODUZ5f--MAKy3Mo4FiJMqE%2F%2F--5bNOuseogigp8FUHF5bxRw%3D%3D; remember_user_token=eyJfcmFpbHMiOnsibWVzc2FnZSI6Ilcxc2laRFE1WkRneFl6SXROalF4TkMwMFlUUTRMVGhpWWpZdFl6RmpOR1V4T1RnM1pqZ3lJbDBzSWlReVlTUXhNU1JvYmxNMGJucHhSaTloWlRaYVluZ3pZMUptUjNKbElpd2lNVGMxTkRnd05UUTVOeTQwTmpJek5qUWlYUT09IiwiZXhwIjoiMjA0NS0wOC0xMFQwNTo1ODoxNy40NjJaIiwicHVyIjoiY29va2llLnJlbWVtYmVyX3VzZXJfdG9rZW4ifX0%3D--65f6b29c9e7f12b657d896643a6a8e3d2333d5fb; cookies_popup_seen=yes; up_next_onboarding=true; cf_clearance=am5T9mKH_r2VJZeaEKgK.oLDLZT74AqBB5y6jp3oaDs-1759853585-1.2.1.1-H2gJpG9igmVqOeYFjjCeXzWZ81I3_NPeKFOUy.NwfpKQABoddLYR9p02jIBs.Ayge5cHZEr04Z6ND1QT3fGLftyvvaDyxVHkCWGnZmhMwhXpU68qeu8qVhAmfh1OG5Ea.Nx9T2oIi.GDDOiV.9FblJ7eW5Mh5G_xegP6UCQmG0G50ACpEgOrsy4kAXL3doFFYehp5MM5W3eZtOXmu0FGwADELgb3Cvahsl5ci9DvPo8; plus_popup_seen=yes",
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0",
       },
@@ -16,7 +16,6 @@ export default async function getTBR(pageNum: string) {
 
   const html = await result.text();
   const parsed = parseBookHtml(html);
-  console.log("🚀 ~ getTBR ~ parsed:", parsed);
   return parsed;
 }
 
@@ -79,7 +78,12 @@ function parseBookHtml(html: string) {
     });
   });
 
+  const filterText = $("span.font-semibold.align-middle").text().trim();
+  const match = filterText.match(/Filter list \((\d+) books\)/);
+  const numberOfBooks = parseInt(match[1], 10);
+  console.log(numberOfBooks); // 412
+
   const books = Array.from(booksMap.values());
 
-  return books;
+  return { books, totalBooks: numberOfBooks };
 }

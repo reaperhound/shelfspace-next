@@ -16,7 +16,11 @@ export default async function MovieGrid({ params }: MovieGridProps) {
           <Card url2x={movie.url2x} key={movie.url2x} />
         ))}
       </div>
-      <Pagination currentPage={Number(page)} totalPages={totalPages} />
+      <Pagination
+        path='movies'
+        currentPage={Number(page)}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

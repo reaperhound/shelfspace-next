@@ -1,5 +1,6 @@
 import getTBR from "@/app/serverActions/books";
 import Card from "@/components/Card";
+import Pagination from "@/components/Pagination";
 
 type BookGridProps = {
   params: Promise<{ page: string }>;
@@ -7,7 +8,7 @@ type BookGridProps = {
 
 export default async function BookGrid({ params }: BookGridProps) {
   const { page } = await params;
-  const books = await getTBR(page);
+  const { books, totalBooks } = await getTBR(page);
   return (
     <div className='w-full grid place-items-center p-[5vh] bg-granny-smith-apple-50'>
       <div className='grid grid-cols-5 place-items-center gap-x-[13px] gap-y-2 w-fit'>
@@ -15,7 +16,11 @@ export default async function BookGrid({ params }: BookGridProps) {
           <Card url2x={book.coverImage} key={book.coverImage} />
         ))}
       </div>
-      {/* <Pagination currentPage={Number(page)} totalPages={totalPages} /> */}
+      <Pagination
+        path='books'
+        currentPage={Number(page)}
+        totalPages={Math.ceil(totalBooks / 10)}
+      />
     </div>
   );
 }

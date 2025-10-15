@@ -7,21 +7,23 @@ import { useEffect } from "react";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
+  path: string;
 }
 
 export default function Pagination({
   currentPage,
   totalPages,
+  path,
 }: PaginationProps) {
   console.log({ currentPage, totalPages });
   const router = useRouter();
 
   function handleForward() {
-    router.push(`/movies/${Number(currentPage) + 1}`);
+    router.push(`/${path}/${Number(currentPage) + 1}`);
   }
 
   function handleBackWard() {
-    router.push(`/movies/${Number(currentPage) - 1}`);
+    router.push(`/${path}/${Number(currentPage) - 1}`);
   }
   return (
     <div className='flex justify-center items-center gap-4 mt-5'>
