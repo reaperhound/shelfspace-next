@@ -1,7 +1,13 @@
 import { getWatchList } from "../../serverActions/movies";
 import Card from "../../../components/Card";
 
-export default async function MovieGrid({ params }: any) {
+type MovieGridProps = {
+  params: {
+    page: string | number;
+  };
+};
+
+export default async function MovieGrid({ params }: MovieGridProps) {
   const { page } = await params;
   const movies = await getWatchList(page);
   return (

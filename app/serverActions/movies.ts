@@ -12,7 +12,7 @@ type Movie = {
   cleanTitle?: string;
 };
 
-export async function getWatchList(pageNum: number) {
+export async function getWatchList(pageNum: string | number) {
   const result = await fetch(
     `https://letterboxd.com/Reaper_Hound/watchlist/page/${pageNum}`
   );
@@ -43,8 +43,6 @@ async function getPosters(link: string) {
 
 function parseWithCheerio(html: string) {
   const $ = cheerio.load(html);
-
-  const totalEntries = $(".js-watchlist-content").attr("data-num-entries");
   const movies: Movie[] = [];
 
   $(".griditem").each((i, elem) => {
