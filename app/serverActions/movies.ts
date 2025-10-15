@@ -64,8 +64,20 @@ function parseWithCheerio(html: string) {
     }
   });
 
+  let totalPages = 1;
+  $(".paginate-pages ul li").each((i, li) => {
+    const aTag = $(li).find("a");
+    if (aTag.length) {
+      const match = aTag.attr("href")?.match(/page\/(\d+)/);
+      if (match) totalPages = Math.max(totalPages, Number(match[1]));
+    }
+  });
+
+  console.log("🚀 ~ parseWithCheerio ~ totalPages:", totalPages);
+
   return {
     movies,
     moviesOnPage: movies.length,
+    totalPages,
   };
 }
