@@ -128,3 +128,53 @@ export async function getSeriesAethon(genre: string) {
 
   return books;
 }
+
+// NYRB Classsics
+export async function getNYRBClassics(page: string) {
+  const result = await fetch(
+    `https://www.nyrb.com/collections/classics?page=${page}`
+  );
+  const html = await result.text();
+  const $ = cheerio.load(html);
+  const books: {
+    title: string;
+    link: string;
+    image: string;
+    author?: string;
+    price?: string;
+  }[] = [];
+
+  $(".card__inner").each((_, el) => {
+    const element = $(el);
+
+    const title = element.find(".card__heading a").first().text().trim();
+
+    const link = element.find(".card__heading a").first().attr("href") || "";
+
+    const image =
+      element.find("img").first().attr("src")?.replace(/^\/\//, "https://") ||
+      ""; // convert //cdn to full URL
+
+    // author can appear outside .card__inner, so we’ll look at the nearest sibling
+    const author =
+      element
+        .next(".card__content")
+        .find(".author")
+        .text()
+        .trim()
+        .replace(/\s+/g, " ") || "";
+
+    // optional: try to extract price if the price section is uncommented
+    const price =
+      element
+        .next(".card__content")
+        .find(".price-item--regular")
+        .first()
+        .text()
+        .trim() || "";
+
+    books.push({ title, link, image, author, price });
+  });
+
+  return books;
+}

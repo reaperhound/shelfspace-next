@@ -1,4 +1,4 @@
-import { getSeriesAethon } from "@/app/serverActions/books";
+import { getNYRBClassics, getSeriesAethon } from "@/app/serverActions/books";
 import Card from "@/components/Card";
 
 type ExploreBooksProps = {
@@ -12,7 +12,18 @@ export default async function ExploreBooks({
 }: ExploreBooksProps) {
   const { source } = await params;
   const { genre } = await searchParams;
-  const books = await getSeriesAethon(genre || "");
+  let books;
+
+  switch (source) {
+    case "aethon":
+      books = await getSeriesAethon(genre || "");
+      break;
+    case "NYRB":
+      books = await getNYRBClassics(genre || "1");
+      break;
+    default:
+      books = [{ image: "" }];
+  }
 
   return (
     <div className='w-full grid place-items-center p-[5vh] bg-granny-smith-apple-50'>
