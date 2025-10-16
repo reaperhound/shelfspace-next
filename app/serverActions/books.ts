@@ -104,3 +104,27 @@ function parseBookHtml(html: string) {
 
   return { books, totalBooks: numberOfBooks };
 }
+
+// --Aethon Books
+export async function getSeriesAethon(genre: string) {
+  const result = await fetch(`https://aethonbooks.com/${genre}/`);
+  const html = await result.text();
+
+  const $ = cheerio.load(html);
+  const books: {
+    title: string;
+    link: string | undefined;
+    image: string | undefined;
+  }[] = [];
+
+  $(".mfs-multi-tax-link").each((_, el) => {
+    const elem = $(el);
+    books.push({
+      title: elem.find(".tax-list-title").text().trim(),
+      link: elem.attr("href"),
+      image: elem.find("img").attr("src"),
+    });
+  });
+
+  return books;
+}
